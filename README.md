@@ -7,16 +7,9 @@
           1){{poly <AEs>} <AEs>}
 
    <AEs>::=
-        1){<AEs> <AE>}|
-        2){<AE>}
+        {<AEs> <AE>}|
+       {<AE>}
         
-   <AE> ::=
-        1)   <num>|
-        2)  {+ <AE> <AE>}|
-        3)  {- <AE> <AE>}|
-        4)  {* <AE> <AE>}|
-        5)  {/ <AE> <AE>}|
-
-         
+   <AE> ::=<num>|{+ <AE> <AE>}|{- <AE> <AE>}|{* <AE> <AE>}|{/ <AE> <AE>}|
           
 |#
