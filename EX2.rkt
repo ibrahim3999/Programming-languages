@@ -136,7 +136,7 @@
 
 ;------------------------iii)-------------------
 
-#|
+(: eval : AE -> Number)
 ;; evaluates AE expressions to numbers 
  (define (eval expr) 
    (cases expr 
@@ -147,12 +147,21 @@
      [(Div l r) (/ (eval l) (eval r))]))
 
 
- (: eval-poly : PLANG -> <-fill in-> ) 
-      (define (eval-poly p-expr) 
-                 <-fill in-> )
+(: eval-poly : PLANG -> (Listof Number)) 
+(define (eval-poly p-expr) 
+  (cases p-expr
+    [(Poly params points)
+     ;; The 'map' function applies the 'eval' function to each parameter in 'params'
+     ;; The 'eval' function is expected to evaluate these parameters
+     ;; The 'createPolynomial' function is then applied to the result of this mapping
+     ;; This function is expected to create a polynomial from the evaluated parameters
+     ;; The 'map' function is again used to apply the 'eval' function to each point in 'points'
+     ;; The created polynomial is then applied to these evaluated points
+     ;; The result is a list of numbers, each of which is the result of applying the polynomial to a point
+     (map (createPolynomial (map eval params)) (map eval points))]))
 
- (: run : String -> (Listof Number)) 
- ;; evaluate a FLANG program contained in a string
+
+ (: run : String -> (Listof Number))  ;; evaluate a FLANG program contained in a string
 
  (define (run str) (eval-poly (parse str)))
 
@@ -164,7 +173,6 @@
 (test (run "{{poly 1 2 3} {1 2 3}}") => '(6 17 34)) 
 (test (run "{{poly 4/5 } {1/2 2/3 3}}") => '(4/5 4/5 4/5)) 
 (test (run "{{poly 2 3} {4}}") => '(14)) 
-(test (run "{{poly 1 1 0} {-1 3 3}}") => '(0 4 4))) 
+(test (run "{{poly 1 1 0} {-1 3 3}}") => '(0 4 4))
 (test (run "{{poly {/ 4 2} {- 4 1}} {{- 8 4}}}") => '(14)) 
 (test (run "{{poly {+ 0 1} 1 {* 0 9}} {{- 4 5} 3 {/ 27 9}}}") => '(0 4 4))
-|#
